@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '@/data/projects';
+import FeaturedShoeViewer from '@/components/viewer/FeaturedShoeViewer';
 
 interface ProjectModalProps {
     project: Project | null;
@@ -61,6 +62,16 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     }, [isOpen, onClose]);
 
     if (!project) return null;
+
+    // Show the interactive 3D device mockup (with "Explore Mockups" → full-screen
+    // screens gallery) whenever the project has real screens to display.
+    const v = project.viewer;
+    const hasMockups =
+        v?.type === '3d' &&
+        (((v.screens?.length ?? 0) > 0) ||
+            ((v.watchScreens?.length ?? 0) > 0) ||
+            ((v.tabletScreens?.length ?? 0) > 0) ||
+            ((v.tablet3dModels?.length ?? 0) > 0));
 
     return (
         <AnimatePresence>
@@ -124,7 +135,28 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                         <span className="font-semibold">Team:</span> {project.details.team}
                                                     </p>
                                                 )}
+                                                {project.details?.duration && (
+                                                    <p className="text-gray-400">
+                                                        <span className="font-semibold">Timeline:</span> {project.details.duration}
+                                                    </p>
+                                                )}
+                                                {project.details?.stakeholderNote && (
+                                                    <p className="text-gray-300 text-base mt-4 border-l-2 border-iridium-500/40 pl-4">
+                                                        {project.details.stakeholderNote}
+                                                    </p>
+                                                )}
                                             </div>
+
+                                            {/* Interactive 3D mockup — drag to rotate, click a screen
+                                                or "Explore Mockups" to open the full-screen gallery */}
+                                            {hasMockups && (
+                                                <div className="mb-8 -mx-2 sm:mx-0">
+                                                    <FeaturedShoeViewer
+                                                        projects={[project]}
+                                                        showHUD={false}
+                                                    />
+                                                </div>
+                                            )}
 
                                             {/* Context */}
                                             {project.details?.context && (
@@ -143,57 +175,30 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                 </section>
                                             )}
 
-                                            {/* Research Goals */}
-                                            {project.details?.researchGoals && project.details.researchGoals.length > 0 && (
-                                                <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Research Goals</h3>
-                                                    <ul className="space-y-3">
-                                                        {project.details.researchGoals.map((goal, idx) => (
-                                                            <li key={idx} className="flex items-start gap-3">
-                                                                <span className="w-6 h-6 bg-iridium-500 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">
-                                                                    {idx + 1}
-                                                                </span>
-                                                                <span className="text-gray-300">{goal}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </section>
-                                            )}
-
-                                            {/* Research Methods */}
+                                            {/* Approach & Process (methods, each with the reasoning behind it) */}
                                             {project.details?.researchMethods && project.details.researchMethods.length > 0 && (
                                                 <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Research Methods</h3>
+                                                    <h3 className="text-2xl font-bold text-white mb-4">Approach &amp; Process</h3>
                                                     <div className="grid gap-4">
                                                         {project.details.researchMethods.map((method, idx) => (
                                                             <div key={idx} className="bg-obsidian-800/50 border border-obsidian-700 rounded-xl p-6">
                                                                 <h4 className="text-lg font-bold metallic-text mb-2">{method.name}</h4>
                                                                 <p className="text-gray-300">{method.description}</p>
+                                                                {method.rationale && (
+                                                                    <p className="text-gray-400 text-sm mt-3 border-l-2 border-iridium-500/40 pl-4">
+                                                                        <span className="text-iridium-400/90 font-semibold">Why this step:</span> {method.rationale}
+                                                                    </p>
+                                                                )}
                                                             </div>
                                                         ))}
                                                     </div>
                                                 </section>
                                             )}
 
-                                            {/* Participants */}
-                                            {project.details?.participants && project.details.participants.length > 0 && (
-                                                <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Participants</h3>
-                                                    <div className="grid md:grid-cols-3 gap-4">
-                                                        {project.details.participants.map((participant, idx) => (
-                                                            <div key={idx} className="bg-obsidian-800/50 border border-obsidian-700 rounded-xl p-5">
-                                                                <h4 className="font-bold text-white mb-2">{participant.role}</h4>
-                                                                <p className="text-base text-gray-400">{participant.description}</p>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </section>
-                                            )}
-
-                                            {/* Key Findings */}
+                                            {/* What I Learned (insights that drove the design) */}
                                             {project.details?.keyFindings && project.details.keyFindings.length > 0 && (
                                                 <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Key Findings</h3>
+                                                    <h3 className="text-2xl font-bold text-white mb-4">What I Learned</h3>
                                                     <div className="space-y-6">
                                                         {project.details.keyFindings.map((finding, idx) => (
                                                             <div key={idx} className="bg-obsidian-800/50 border border-obsidian-700 rounded-xl p-6">
@@ -212,10 +217,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                 </section>
                                             )}
 
-                                            {/* Design Iterations */}
+                                            {/* Design Decisions (what shipped) */}
                                             {project.details?.designIterations && project.details.designIterations.length > 0 && (
                                                 <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Design Iterations</h3>
+                                                    <h3 className="text-2xl font-bold text-white mb-4">Design Decisions</h3>
                                                     <div className="grid md:grid-cols-2 gap-4">
                                                         {project.details.designIterations.map((iteration, idx) => (
                                                             <div key={idx} className="bg-obsidian-800/50 border border-obsidian-700 rounded-xl p-6">
@@ -234,10 +239,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                 </section>
                                             )}
 
-                                            {/* Impact */}
+                                            {/* Outcome & Impact */}
                                             {project.details?.impact && project.details.impact.length > 0 && (
                                                 <section className="mb-10">
-                                                    <h3 className="text-2xl font-bold text-white mb-4">Impact & Learnings</h3>
+                                                    <h3 className="text-2xl font-bold text-white mb-4">Outcome &amp; Impact</h3>
                                                     <div className="bg-gradient-to-br from-iridium-500/10 to-iridium-500/5 border border-iridium-500/30 rounded-xl p-6">
                                                         <ul className="space-y-3">
                                                             {project.details.impact.map((item, idx) => (
@@ -248,6 +253,42 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                                             ))}
                                                         </ul>
                                                     </div>
+                                                </section>
+                                            )}
+
+                                            {/* How I Got There — supporting detail (goals + participants), demoted below the product narrative */}
+                                            {((project.details?.researchGoals && project.details.researchGoals.length > 0) ||
+                                                (project.details?.participants && project.details.participants.length > 0)) && (
+                                                <section className="mb-10">
+                                                    <h3 className="text-xl font-bold text-gray-300 mb-5">How I Got There</h3>
+                                                    {project.details?.researchGoals && project.details.researchGoals.length > 0 && (
+                                                        <div className="mb-6">
+                                                            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Goals</h4>
+                                                            <ul className="space-y-3">
+                                                                {project.details.researchGoals.map((goal, idx) => (
+                                                                    <li key={idx} className="flex items-start gap-3">
+                                                                        <span className="w-6 h-6 bg-iridium-500/80 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">
+                                                                            {idx + 1}
+                                                                        </span>
+                                                                        <span className="text-gray-300">{goal}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                    {project.details?.participants && project.details.participants.length > 0 && (
+                                                        <div>
+                                                            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Who I Worked With</h4>
+                                                            <div className="grid md:grid-cols-3 gap-4">
+                                                                {project.details.participants.map((participant, idx) => (
+                                                                    <div key={idx} className="bg-obsidian-800/50 border border-obsidian-700 rounded-xl p-5">
+                                                                        <h4 className="font-bold text-white mb-2">{participant.role}</h4>
+                                                                        <p className="text-base text-gray-400">{participant.description}</p>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </section>
                                             )}
 

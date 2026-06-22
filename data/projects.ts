@@ -31,12 +31,14 @@ export interface Project {
         role?: string;
         team?: string;
         duration?: string;
+        stakeholderNote?: string;
         context?: string;
         problemStatement?: string;
         researchGoals?: string[];
         researchMethods?: {
             name: string;
             description: string;
+            rationale?: string;
         }[];
         participants?: {
             role: string;
@@ -74,7 +76,7 @@ export const projects: Project[] = [
         name: 'Energy Insights Network (ESN)',
         year: 2024,
         category: 'Course Project',
-        description: 'UX research and validation project focused on refining an energy insights platform for manufacturing teams. Conducted field research, usability testing, and iterative design to improve onboarding, dashboards, error handling, and AI-assisted insights.',
+        description: 'UX research and validation project focused on refining an energy insights platform for manufacturing teams. Conducted field research at Smart Manufacturing Roadshow plus in-depth interviews with program stakeholders and systems-integration engineers — including a Director of Business Development and a Solutions Architect — to ground dashboard design in the broader Industry 4.0 manufacturing ecosystem.',
         shortDescription: 'Energy monitoring dashboard for manufacturing',
         tools: ['Figma', 'User Interviews', 'Wireframing', 'Prototyping', 'Usability Testing'],
         tags: ['User Research', 'Data Visualization', 'AI Trust', 'Manufacturing'],
@@ -99,8 +101,8 @@ export const projects: Project[] = [
             ],
         },
         details: {
-            role: 'UX Researcher & Designer',
-            team: 'Cross-functional (design + research)',
+            role: 'UX Researcher',
+            team: '4-person team',
             context: 'Prototype testing and validation for energy monitoring platform',
             problemStatement: 'Manufacturing teams need to monitor machine performance and energy usage in real time, quickly understand and respond to system errors, and trust AI-driven insights enough to act on them—all without slowing down operations. Early iterations revealed overly text-heavy onboarding, confusing navigation, unclear error notifications, and skepticism around AI recommendations.',
             researchGoals: [
@@ -118,6 +120,10 @@ export const projects: Project[] = [
                 {
                     name: 'User Interviews (Field Research)',
                     description: 'Conducted semi-structured interviews at Smart Manufacturing Roadshow in Indiana with current and potential ESN users, focusing on onboarding experience, AI chatbot usefulness, workflow fit, and improvement recommendations.'
+                },
+                {
+                    name: 'Stakeholder & Engineer Interviews',
+                    description: 'Conducted in-depth interviews with program stakeholders and systems-integration engineers in the manufacturing space — including a Director of Business Development at a systems integrator firm and a Solutions Architect on the software-engineering side. Captured how the dashboard fits into the broader Industry 4.0 ecosystem, the variance in manufacturer needs, hardware-installation complexity, and the flexibility-vs-customization tradeoff the platform has to resolve.'
                 }
             ],
             participants: [
@@ -132,6 +138,14 @@ export const projects: Project[] = [
                 {
                     role: 'Senior Manufacturing Operations Manager',
                     description: '30+ years of industry experience'
+                },
+                {
+                    role: 'Systems Integrator (Business Development)',
+                    description: 'Director of Business Development at a systems integrator firm partnered with the Energy Insights program — connects manufacturers to ESN, configures the standard 5 energy dashboards, and identifies custom insights per client.'
+                },
+                {
+                    role: 'Solutions Architect (Software Engineering)',
+                    description: 'Solutions Architect at an automation firm building software solutions for manufacturing clients — designs the data architecture connecting Opto 22 hardware, Ignition software, and MQTT data flows that power the ESN dashboards.'
                 }
             ],
             keyFindings: [
@@ -223,13 +237,13 @@ export const projects: Project[] = [
     },
     {
         id: 'canvas-ux-redesign',
-        name: 'Canvas UX Research & Flow Redesign',
+        name: 'Canvas AI-Assisted Quiz Creation',
         year: 2024,
         category: 'Research',
-        description: 'Mixed-methods UX research identifying usability pain points and workflow inefficiencies in Canvas LMS across students, faculty, administrators, and staff. Combined user interviews, observational task analysis, heuristic evaluation, and measurement planning to uncover opportunities for navigation, efficiency, and mobile improvements.',
-        shortDescription: 'LMS usability research',
-        tools: ['User Interviews', 'Observational Studies', 'Heuristic Evaluation', 'Time-on-Task Measurement', 'Click Count Analysis'],
-        tags: ['Usability Testing', 'Mixed-Methods', 'Workflow Analysis', 'EdTech'],
+        description: 'Mixed-methods UX research on Canvas LMS focused on the faculty quiz creation flow. The original concept was a preset-based quiz builder; mid-study, a user-testing participant suggested integrating AI to generate quiz questions, and that suggestion drove a research-driven pivot to a "Build with AI" feature. Combined user interviews, observational task analysis with time-on-task and click-count measurement, heuristic evaluation, persona synthesis (John Davis — Associate Professor) and user journey mapping, longitudinal low → mid → high fidelity prototype testing, and a Likert survey on faculty AI comfort.',
+        shortDescription: 'AI-assisted quiz creation research for Canvas faculty',
+        tools: ['User Interviews', 'Observational Studies', 'Heuristic Evaluation', 'Time-on-Task Measurement', 'Click Count Analysis', 'Multi-Fidelity Prototype Testing', 'Likert Surveys'],
+        tags: ['Canvas LMS', 'AI', 'Mixed-Methods', 'Faculty Workflows', 'EdTech'],
         featured: true,
         logo: '/images/canvas-logo-opt.png',
         images: {
@@ -255,154 +269,181 @@ export const projects: Project[] = [
         },
         details: {
             role: 'UX Researcher',
-            team: 'Research team',
-            context: 'Mixed-methods research case study on Canvas Learning Management System across multiple user roles (students, faculty, administrators, staff)',
-            problemStatement: 'Canvas users across different roles experienced usability pain points and workflow inefficiencies that were masked by high task completion rates. While users could technically complete tasks, many workflows were inefficient, cognitively demanding, and required excessive clicks and navigation. Mobile experience lacked parity with desktop, and faculty faced time-consuming manual processes for quiz editing and course setup.',
+            team: '4-person team',
+            stakeholderNote: 'Coordinated with a 4-person research team across multi-stage testing with faculty, students, and academic staff who use Canvas LMS daily.',
+            context: 'A Canvas LMS research and redesign project. Discovery interviews and observational sessions surfaced that creating quizzes was the most cumbersome and time-consuming task faculty performed on Canvas. The team initially designed a preset-based quiz builder using past quizzes as templates, but low-fidelity testing revealed Canvas already had a "Duplicate" feature serving a similar purpose. A user-testing participant suggested integrating AI to generate quiz questions — that suggestion drove a research-driven pivot to a "Build with AI" feature, which carried through the mid and high fidelity rounds.',
+            problemStatement: 'Faculty members spend disproportionate time creating quizzes in Canvas LMS. A 9-respondent survey of professors found 44% rate the current quiz creation flow as time-consuming, 33% neutral, only 22% efficient, and zero respondents rated it very efficient. Observational sessions confirmed the friction — quiz creation had the highest time-on-task of any faculty workflow observed. The research question became: can AI-assisted question generation, integrated into the existing Canvas authoring flow, meaningfully reduce the time and click cost for faculty without compromising assessment quality or faculty trust?',
             researchGoals: [
-                'Identify primary pain points across different Canvas user roles',
-                'Understand how frequently used workflows differ between students, faculty, and administrators',
-                'Measure inefficiencies using time-on-task and click count',
-                'Evaluate usability issues using heuristic principles',
-                'Identify opportunities for workflow and system-level improvements'
+                'Identify the most cumbersome faculty workflow in Canvas LMS through observational research',
+                'Measure baseline time-on-task and click counts on the existing quiz creation flow',
+                'Evaluate the existing flow against Nielsen usability heuristics',
+                'Design and iteratively test an AI-assisted quiz creation flow across low, mid, and high fidelity',
+                'Survey faculty on AI comfort and perceived improvement to validate the AI-integration direction'
             ],
             researchMethods: [
                 {
                     name: 'User Interviews',
-                    description: 'Conducted structured interviews covering frequency and purpose of Canvas usage, typical workflows, most and least useful features, frustrations and pain points, mobile usage and accessibility needs, training and support resources, and desired improvements. Participants represented 8 user roles with 5–10+ years of Canvas experience.'
+                    description: 'Each team member conducted user interviews with faculty, students, and academic staff using Canvas LMS. Sessions ran ~30 minutes in facilitator + note-taker pairs using a structured 10–15 question outline for consistency across facilitators.',
+                    rationale: 'Chose paired interviews because consistency across facilitators matters more than volume — the same outline run by 4 facilitators produces comparable data, while solo interviewers introduce facilitator drift across roles.'
                 },
                 {
                     name: 'Observational Interviews',
-                    description: 'Participants completed 5 predefined tasks while researchers tracked time-on-task, click count, errors, and task completion. Revealed that many workflows were technically successful but inefficient and cognitively demanding. Tasks included course setup, module organization, quiz editing, content imports, and attendance tracking.'
+                    description: 'Faculty completed 5 predefined Canvas tasks (quiz creation among them) while researchers tracked time-on-task, click count, errors, and task completion. Sessions ran 30–45 minutes with a dedicated facilitator, note-taker, and metric-tracker. Quiz creation surfaced as the most cumbersome task.',
+                    rationale: 'Chose observation over self-reported surveys because Canvas users systematically underestimate workflow friction they have normalized after years of use. The interview said "it works fine"; the click-count and time-on-task said otherwise.'
                 },
                 {
                     name: 'Heuristic Evaluation',
-                    description: 'Conducted heuristic evaluation on existing Canvas flows focusing on course setup, module organization, quiz creation and editing, content imports, attendance tracking, and visibility/access control. Identified violations of usability principles and opportunities for improvement.'
+                    description: 'Independent heuristic evaluation on the existing Canvas quiz creation flow using Nielsen Ten Heuristics — focus on error prevention, system status visibility, consistency and standards, and recognition over recall.',
+                    rationale: 'Layered heuristic evaluation onto user data to surface usability violations long-tenured faculty had habituated to — the workarounds long-time Canvas users no longer notice as problems.'
                 },
                 {
-                    name: 'Measurement Planning',
-                    description: 'Created measurement plan to establish baseline performance metrics, enable comparison against redesigned flows, and track efficiency improvements over time. Focused on time-on-task, click count, error rates, and task completion across user roles.'
+                    name: 'Persona Synthesis',
+                    description: 'Synthesized interview and observation data into a primary faculty persona — John Davis, Associate Professor, 47, Indianapolis — capturing core user needs (efficiency, flexibility, third-party integration, user-friendly quiz editing) and mindsets (focused on necessity, adaptive to limitations, oriented by student experience, desires assessment automation). The persona anchored every subsequent design decision.',
+                    rationale: 'A persona built from real interview and observation data — not a stock template — kept the team honest. When a design choice could not be justified against John\'s needs and mindsets, it got cut.'
+                },
+                {
+                    name: 'User Journey Mapping',
+                    description: 'Mapped John Davis\'s quiz-creation journey across user steps, actions, goals & experiences, feelings & thoughts, pain points, and opportunities — from onboarding into the quiz authoring flow through publication. Identified where friction and emotional dips clustered and where design intervention could move the needle most.',
+                    rationale: 'A persona on its own is a snapshot; a journey map turns it into a sequence. Mapping the journey made it possible to prioritize which moments of friction mattered most to redesign — and which were tolerable noise.'
+                },
+                {
+                    name: 'Low / Mid / High Fidelity Usability Testing',
+                    description: 'Multi-stage prototype testing on the redesigned quiz creation flow. Low fidelity validated the initial preset-based concept (and surfaced the AI suggestion from a participant). Mid fidelity tested the "Build with AI" feature. High fidelity integrated the details / configuration section into the flow for end-to-end measurement.',
+                    rationale: 'Iterative testing at three fidelities lets the team verify whether each design change actually moved baseline metrics. The preset → AI pivot only emerged because low-fidelity testing forced the team to confront an existing Canvas feature (Duplicate) doing what their prototype attempted.'
+                },
+                {
+                    name: 'Faculty AI Survey',
+                    description: 'Likert-scale survey of professors (9 respondents) measuring current quiz creation efficiency, comfort with AI integration in Canvas, and perceived impact of AI on assessment quality. Anchored the team\'s confidence to pursue the AI direction.',
+                    rationale: 'Needed quantitative validation that faculty would actually accept AI-assisted quiz creation. The survey complemented the qualitative pivot signal from user testing with broader sentiment data.'
                 }
             ],
             participants: [
                 {
+                    role: 'Faculty (Primary)',
+                    description: 'Instructors across multiple disciplines who regularly create quizzes in Canvas. The primary research focus and target audience for the AI-assisted quiz creation flow.'
+                },
+                {
                     role: 'Students',
-                    description: 'Undergraduate and MBA students (5–10+ years Canvas experience)'
+                    description: 'Undergraduate and graduate students with 5–10+ years of Canvas experience. Studied for downstream assessment-taking context.'
                 },
                 {
-                    role: 'Faculty',
-                    description: 'Instructors across multiple disciplines'
+                    role: 'Academic Staff',
+                    description: 'Advisors, librarians, and CTLA staff supporting faculty Canvas use. Contributed observations on faculty training gaps and complementary tool patterns.'
                 },
                 {
-                    role: 'Administrators',
-                    description: 'Program directors and academic administrators'
-                },
-                {
-                    role: 'Support Staff',
-                    description: 'Advisors, librarians, CTLA staff'
+                    role: 'Faculty Survey Cohort',
+                    description: '9-respondent Likert-scale survey on AI comfort, current quiz creation efficiency, and perceived AI impact on assessment quality.'
                 }
             ],
             keyFindings: [
                 {
-                    category: 'Navigation & Workflow Inefficiencies',
+                    category: 'Survey — Current Quiz Creation Pain',
                     insights: [
-                        'High task completion rates masked underlying inefficiencies',
-                        'Many tasks required excessive clicks and long navigation paths',
-                        'Users frequently had to navigate multiple layers to return to where they last worked',
-                        'Lack of "system memory" caused repetitive navigation',
-                        'MBA program pages grouping all courses into one view increased friction'
+                        '44% of professors rated current Canvas quiz creation as time-consuming; zero rated it very efficient',
+                        'Combined with the 9% rating it very time-consuming, more than half (54%) of surveyed faculty experienced quiz creation as friction — not a niche pain point'
                     ]
                 },
                 {
-                    category: 'Mobile Experience Gaps',
+                    category: 'Survey — AI Comfort & Quality Expectations',
                     insights: [
-                        'Mobile app lacked parity with desktop functionality',
-                        'Mobile workflows consistently slower and more error-prone than desktop',
-                        'Slower load times and reduced functionality discouraged mobile use',
-                        'Many users relied on laptops even when mobile access was important'
+                        'Faculty AI comfort split 33/33/33 between uncomfortable, neutral, and comfortable — no respondent strongly endorsed AI integration',
+                        '45% of faculty believed AI-generated quizzes would likely improve assessment quality; another 45% remained neutral, with only 9% leaning very unlikely — split conviction signaling openness, not strong endorsement',
+                        'Likely + Neutral combined reached 90% — faculty were not opposed to the AI direction, but their judgment would hinge on the actual implementation. Trust would need to be earned through interaction patterns rather than promised through UI claims'
                     ]
                 },
                 {
-                    category: 'Faculty & Administrator Pain Points',
+                    category: 'Low Fidelity — The Preset Pivot',
                     insights: [
-                        'Quiz editing was error-prone and time-consuming',
-                        'Quiz editing and course setup had significantly higher time-on-task',
-                        'Manual date entry every semester created unnecessary workload',
-                        'Default visibility and access settings were confusing',
-                        'Limited ability to automate tasks (e.g., no JavaScript support)'
+                        'Original concept was a preset-based quiz builder using past quizzes as templates',
+                        'Testing surfaced that Canvas already had a "Duplicate" feature serving the same purpose — the preset concept was redundant',
+                        'A user-testing participant suggested integrating AI to generate quiz questions instead',
+                        'Participant-driven pivot to "Build with AI" feature — research-driven scope change, not team-driven'
                     ]
                 },
                 {
-                    category: 'Integration & External Tool Reliance',
+                    category: 'Mid Fidelity — "Build with AI" Validation',
                     insights: [
-                        'Users relied heavily on external tools: Outlook, Google Calendar, Zoom, Teams, Kaltura, PlayPosit',
-                        'Poor integration with Outlook forced users to maintain parallel systems',
-                        'Lack of seamless integration created workflow fragmentation',
-                        'Users developed workarounds using external tools'
+                        'Vertical layout for the Build-with-AI options aligned better with Canvas\'s native conventions than horizontal',
+                        'Users wanted clear button consistency across each step to know where to navigate next',
+                        'Hierarchy of details: users needed to complete a section before being allowed to proceed',
+                        'Autosave replacing the Save button was not welcomed — "Why is it a button if it has already been saved?"'
+                    ]
+                },
+                {
+                    category: 'High Fidelity — Integration & Trust Gaps',
+                    insights: [
+                        'Delays in navigating the calendar / date section of the details page',
+                        'Users delayed finding the "new quiz" button; saw the table of assigned quizzes first',
+                        '"Mastery Path" feature lacked context — users did not know what it was or why it was there',
+                        'Users wanted clearer separation between "Build with AI" and manual creation — suggested adding "OR" between options',
+                        'Faculty wanted explicit confirmation that a quiz had been published'
                     ]
                 }
             ],
             designIterations: [
                 {
-                    area: 'Persistent Navigation Memory',
+                    area: 'Lo-Fi → Mid-Fi: Preset Builder → "Build with AI"',
                     improvements: [
-                        'Return users to their last active page or task',
-                        'Reduce repetitive navigation through system memory',
-                        'Implement breadcrumb trails and quick-return features'
+                        'Initial Lo-Fi concept: preset-based quiz builder using past quizzes as templates',
+                        'Lo-Fi testing surfaced Canvas already had a "Duplicate" feature serving the same purpose',
+                        'A user-testing participant suggested integrating AI for question generation',
+                        'Mid-Fi pivoted to a "Build with AI" feature — research-driven, participant-suggested'
                     ]
                 },
                 {
-                    area: 'Mobile Parity & Performance',
+                    area: 'Mid-Fi Refinements — Layout & Hierarchy',
                     improvements: [
-                        'Match desktop functionality more closely on mobile',
-                        'Improve mobile load times and responsiveness',
-                        'Optimize mobile workflows for common tasks'
+                        'Restructured "Build with AI" options vertically to align with Canvas conventions (was horizontal in Mid-Fi v1)',
+                        'Standardized button styling across all steps for clearer next-action signaling',
+                        'Enforced sequential completion: users must finish a section before proceeding to the next',
+                        'Reverted autosave-only pattern after users explicitly rejected the loss of an explicit Save button'
                     ]
                 },
                 {
-                    area: 'Workflow Simplification',
+                    area: 'Hi-Fi: Details Section Integration',
                     improvements: [
-                        'Reduce click depth for common tasks',
-                        'Improve quiz editing and saving behavior',
-                        'Streamline course setup and module organization',
-                        'Reduce reliance on repetitive manual inputs'
+                        'Integrated the details / configuration page into the quiz creation task flow for end-to-end measurement',
+                        'Without details integrated, Mid-Fi metrics were undercounting the real click cost',
+                        'Hi-Fi enabled accurate before/after time-on-task and click-count comparison against the baseline'
                     ]
                 },
                 {
-                    area: 'Automation & Customization',
+                    area: 'Hi-Fi Refinements — Affordance & Confirmation',
                     improvements: [
-                        'Allow more flexibility for faculty (bulk edits, scripting)',
-                        'Automate repetitive tasks like date entry',
-                        'Provide clearer access and visibility controls',
-                        'Improve feedback and system status indicators'
+                        'Added "OR" separator between Build-with-AI and manual creation to clarify the choice',
+                        'Surfaced the new-quiz button more prominently — users were finding the assigned-quizzes table first',
+                        'Added explicit publication confirmation message addressing faculty\'s request for clearer status feedback',
+                        'Flagged design inconsistencies (rounded vs. angular boxes) breaking Canvas\'s visual consistency standard'
                     ]
                 }
             ],
             impact: [
-                'Demonstrated the value of combining qualitative and quantitative research',
-                'Highlighted that successful task completion does not equal good UX',
-                'Reinforced the importance of role-based workflow analysis',
-                'Identified specific inefficiencies through time-on-task and click count metrics',
-                'Provided actionable recommendations for navigation, mobile, and workflow improvements',
-                'Strengthened skills in research planning, synthesis, and evaluation'
+                'High-fidelity AI-assisted prototype cut quiz-creation time-on-task from 273.62s → 104s (a 62% reduction) and click count from 24.5 → 17 (a 30% reduction), with task completion held at 100% and 0% error rate',
+                'Identified quiz creation as the most cumbersome and time-consuming faculty workflow — confirmed in survey: 44% of professors rated it time-consuming, zero very efficient',
+                'Validated the AI-integration direction quantitatively: 56% of surveyed faculty believed AI-generated quizzes would likely improve assessment quality',
+                'Demonstrated a research-driven, participant-suggested pivot: preset builder → "Build with AI" — the user testing surfaced the AI direction, not the team',
+                'Surfaced AI trust as a downstream design problem: faculty AI comfort split 33/33/33 — the redesign had to earn that trust through interaction patterns, not promise it',
+                'Established a measurement baseline (time-on-task + click count) on the existing Canvas quiz creation flow against which any future AI-assisted redesign can be evaluated',
+                'Strengthened muscle in mixed-methods research, observational methodology, heuristic evaluation, multi-fidelity usability testing, and survey instrumentation'
             ],
             futureOpportunities: [
-                'Prototype and test redesigned navigation flows',
-                'Develop mobile-first workflows for common tasks',
-                'Create automation tools for faculty (bulk editing, templates)',
-                'Improve integration with external tools (Outlook, Google Calendar)',
-                'Conduct longitudinal study to measure efficiency improvements'
+                'Production pilot of the "Build with AI" feature with a faculty cohort across a full semester',
+                'Quantitative A/B test of AI-assisted vs. manual quiz creation measuring time-on-task and assessment quality',
+                'Investigate AI trust calibration patterns for faculty (transparency, source citations, editability of AI output)',
+                'Extend the AI-assisted authoring lens to other high-friction Canvas faculty workflows (course setup, module organization, content imports)',
+                'Study downstream student experience impact of AI-generated assessments — does AI-authored content read differently to students?'
             ],
             skillsApplied: [
-                'Qualitative Research',
-                'Quantitative Research',
+                'Mixed-Methods Research',
+                'Longitudinal Usability Testing',
                 'User Interviews',
-                'Observational Studies',
-                'Usability Testing',
+                'Observational Studies (Time-on-Task + Click Count)',
                 'Heuristic Evaluation',
+                'Likert-Scale Post-Task Surveys',
                 'Measurement Planning',
-                'Task Analysis',
-                'Human-Computer Interaction',
-                'Mixed-Methods Research'
+                'Iterative Prototype Testing',
+                'Stakeholder Communication',
+                'Cross-Role Synthesis'
             ]
         }
     },
@@ -488,15 +529,16 @@ export const projects: Project[] = [
                 {
                     category: 'Critical Usability Issues',
                     insights: [
-                        'Quantitative metrics showed error rates as high as 57% on the most complex task',
-                        'Post-task satisfaction bottomed out at 2 out of 5, confirming the frustration observed in think-aloud sessions',
+                        'Quantitative metrics showed error rates as high as 57% on rearranging songs',
+                        'Finding a friend\'s profile averaged 13.25 clicks (range up to 25) with a 36-second standard deviation in time-on-task',
+                        'Post-task satisfaction for playlist rearrangement bottomed at 2 out of 5, confirming the frustration observed in think-aloud sessions',
                         'High error rates clustered around playlist organization and friend discovery — not playback'
                     ]
                 },
                 {
                     category: 'Below-Benchmark Usability (SUS)',
                     insights: [
-                        'The System Usability Scale produced an average score of 53.13, well below the 70 industry benchmark',
+                        'The System Usability Scale produced an average score of 53.13 (standard deviation 17.84), well below the 70 industry benchmark',
                         'The result held at a 99% confidence level, making the gap statistically reliable rather than anecdotal',
                         'A strong brand was masking a measurably below-average usability experience'
                     ]
@@ -587,9 +629,10 @@ export const projects: Project[] = [
         },
         details: {
             role: 'UX Researcher & Designer',
-            team: 'Design team (collaborative)',
+            team: '4-person team',
             duration: 'Full semester',
-            context: 'Designed an access technology for a user living with POTS — a chronic condition causing rapid heart rate spikes, dizziness, fatigue, and fainting upon standing. The project combined primary research with the user and secondary medical research to create a holistic solution addressing both physical support (smart cane) and digital management (companion app).',
+            stakeholderNote: 'Co-designed with a primary user living with POTS; grounded in medical literature and triangulated against community insights from POTS, dysautonomia, and chronic-illness forums.',
+            context: 'Access-technology research for a user living with POTS — a chronic condition causing rapid heart rate spikes, dizziness, fatigue, and fainting upon standing. The research went deeper than a single product brief: thematic coding across interview data surfaced that POTS rarely shows up alone — cognitive, sensory, and social-navigation needs mattered as much as the physical episodes themselves. Findings shaped an integrated companion app + smart cane system designed to be both functional and socially discreet.',
             problemStatement: 'The user experiences sudden, debilitating POTS episodes — rapid heart rate spikes, dizziness, brain fog, and risk of fainting — triggered by standing or positional changes. Existing tools did not provide real-time detection, guided intervention, or comprehensive symptom tracking. The user needed a way to detect episodes early, receive immediate guided support, log symptoms for medical appointments, and carry emergency features — all without drawing unwanted attention to their condition.',
             researchGoals: [
                 'Understand the user\'s daily experience living with POTS and identify key pain points',
@@ -601,66 +644,102 @@ export const projects: Project[] = [
             researchMethods: [
                 {
                     name: 'User Interviews & Contextual Inquiry',
-                    description: 'Conducted in-depth interviews with the user to understand their daily routines, episode triggers, coping strategies, and frustrations with current tools. Observed how they navigate daily activities and identified moments where technology could provide the most value.'
+                    description: 'Conducted in-depth interviews with the primary user to understand daily routines, episode triggers, coping strategies, multi-condition navigation, and frustrations with current tools. Observed how they navigate daily activities and identified moments where technology could provide the most value.',
+                    rationale: 'Chose direct co-design with a real user over proxy research because chronic illness is deeply personal and lab-only conditions miss the lived texture of moving through a day with POTS.'
                 },
                 {
-                    name: 'Secondary Medical Research',
-                    description: 'Reviewed medical literature on POTS — its symptoms, prevalence, treatment options, and the role of heart rate monitoring in episode detection. Researched existing wearable health technologies and identified opportunities for integration with smart cane hardware.'
+                    name: 'Affinity Mapping & Thematic Coding',
+                    description: 'Clustered observations and quotes into 8 cross-cutting themes — Cognitive Accessibility, Sensory Preferences, Mobility & POTS, Medication Management, Communication & Memory, Interface Preferences, Social Navigation, and Tools & Hacks. Each theme grounded in specific user examples and traced through to design recommendations.',
+                    rationale: 'Affinity mapping revealed that POTS rarely shows up alone. Coding into 8 themes prevented the design from over-indexing on the dramatic moments (episodes) while ignoring the quieter friction (cognitive load, social masking, sensory regulation) that shaped daily life equally.'
                 },
                 {
-                    name: 'Low-Fidelity Prototyping & Testing',
-                    description: 'Created initial wireframes and low-fidelity prototypes for both the app and cane. Tested early concepts with the user to validate the information architecture, screen flows, and physical cane form factor before moving to high-fidelity design.'
+                    name: 'Persona Synthesis',
+                    description: 'Synthesized interview and observational data into a primary persona capturing the user\'s multi-condition profile, daily patterns, coping strategies, and design needs. The persona anchored design decisions in real lived experience and traveled with the team into every iteration.',
+                    rationale: 'A persona built from real data — not stock templates — kept the design honest. When a feature could not be justified against the persona, it got cut.'
                 },
                 {
-                    name: 'High-Fidelity Prototyping & Usability Testing',
-                    description: 'Designed a complete high-fidelity prototype in Figma covering episode detection alerts, breathing exercises, symptom logging, vibration notification settings, and episode support tips. Conducted usability testing sessions to refine interactions and visual design.'
+                    name: 'Competitive Analysis',
+                    description: 'Reviewed existing wearable health platforms (Pirilik, TachyMon, mainstream fitness trackers) and accessibility-focused apps to map current paradigms, identify gaps for chronic-illness contexts, and surface conventions worth keeping or breaking.',
+                    rationale: 'Fitness-tracker conventions assume increase-activity goals. Chronic-illness pacing inverts that assumption. Competitive analysis surfaced where the genre conventions actively harmed our user.'
+                },
+                {
+                    name: 'Secondary Research & Community Insights',
+                    description: 'Reviewed medical literature on POTS pathophysiology, heart rate monitoring, and assistive technology. Triangulated against user discussions in POTS, dysautonomia, engineer-with-chronic-illness, and broader chronic-illness online communities to broaden understanding beyond a single user.',
+                    rationale: 'Single-user research risks over-fitting. Community discussions surfaced patterns (frustration with healthcare dismissal, pacing strategies, wearable repurposing) that recurred across many users with POTS — validating which findings to generalize and which to keep specific.'
+                },
+                {
+                    name: 'Low- & High-Fidelity Prototyping & Usability Testing',
+                    description: 'Iterated through hand-drawn low-fidelity sketches into a complete high-fidelity Figma prototype covering episode alerts, breathing exercises, symptom logging, vibration settings, and the integrated cane hardware. Tested at each fidelity with the primary user; refined interactions and visual design based on feedback.',
+                    rationale: 'Multi-fidelity testing let the team verify whether each design change actually solved the friction surfaced in affinity mapping. Findings that recurred across fidelities were real; findings that disappeared were noise.'
                 }
             ],
             participants: [
                 {
-                    role: 'Primary User',
-                    description: 'Individual living with POTS who experiences daily episodes'
+                    role: 'Primary User (Co-Design Partner)',
+                    description: 'Individual living with POTS plus overlapping conditions (ADHD, dyslexia); participated across interviews, low-fi and hi-fi testing.'
                 },
                 {
-                    role: 'Medical Research Sources',
-                    description: 'Academic literature on POTS, heart rate monitoring, and assistive technology'
+                    role: 'Online Chronic-Illness Communities',
+                    description: 'POTS, dysautonomia, and broader chronic-illness forums (including engineer- and doctor-with-chronic-illness threads) reviewed for recurring patterns around pacing, wearable use, and healthcare communication.'
+                },
+                {
+                    role: 'Medical Literature Sources',
+                    description: 'Peer-reviewed sources on POTS pathophysiology, heart rate monitoring, and assistive technology paradigms.'
                 }
             ],
             keyFindings: [
                 {
-                    category: 'Episode Detection & Response',
+                    category: 'Mobility, POTS & Episode Management',
                     insights: [
-                        'Heart rate spikes above a personal threshold (e.g., 120 BPM) are the earliest reliable indicator of an episode',
-                        'The user needs immediate, actionable guidance — not just an alert — when an episode begins',
-                        'Multiple response options (breathing exercise, self-dismiss, emergency call) are critical since episode severity varies',
-                        'Real-time monitoring via watch or cane sensor provides the fastest detection'
+                        'Heart rate escalates noticeably when standing for extended periods — a leading indicator of an episode',
+                        'The user already uses a cane and heart rate tracker during flare-ups; design should extend the existing toolkit, not replace it',
+                        'Multiple response options needed since episode severity varies — single-state alerts are not enough',
+                        'Real-time monitoring via watch or cane sensor provides the fastest, most reliable detection'
                     ]
                 },
                 {
-                    category: 'Symptom Logging & Tracking',
+                    category: 'Cognitive Accessibility & Communication',
                     insights: [
-                        'The user struggles to recall episode details during medical appointments',
-                        'Logging needs to capture heart rate data, activity context, mood, and symptoms simultaneously',
-                        'Voice recording capability is important when the user is too symptomatic to type',
-                        'Medical data auto-population from connected devices reduces logging burden'
+                        'POTS rarely shows up alone — ADHD, dyslexia, and POTS overlap meaningfully for many users',
+                        'Cognitive load shapes interaction preferences: minimal steps, simple layouts, longer-form media with captions',
+                        'Memory & communication workarounds are already in use: screenshots as reminders, spellcheck for misspellings, instant-send messaging to avoid forgetting',
+                        'Difficulty switching tasks is common — interfaces should reduce mode-switching, not introduce it'
                     ]
                 },
                 {
-                    category: 'Physical Support & Discretion',
+                    category: 'Sensory Preferences',
                     insights: [
-                        'The user benefits from physical stability support but wants to avoid drawing unnecessary attention',
-                        'A collapsible cane design makes the device portable and socially comfortable',
-                        'Integrating health sensors, medication storage, and an SOS button into the cane handle creates a single support device',
-                        'An ergonomic game-controller-style grip improves comfort during extended use'
+                        'Screen contrast matters more than layout — contrast is the load-bearing accessibility variable',
+                        'Font choice and brightness affect prolonged reading',
+                        'Auditory distractions break focus — quiet environments preferred, tactile notifications preferred over audio',
+                        'Interface design must respect sensory regulation, not assume neurotypical processing'
                     ]
                 },
                 {
-                    category: 'Daily Management',
+                    category: 'Medication Management',
                     insights: [
-                        'Hydration, nutrition, and medication tracking are essential parts of POTS management',
-                        'The user benefits from personalized insights based on logged episode patterns',
-                        'Customizable vibration notification settings allow the user to choose alert intensity and triggers',
-                        'Episode support tips (elevate legs, drink water, rest, loosen clothes) provide immediate relief guidance'
+                        'Pills are often forgotten at home when daily routines change',
+                        'A weekly portable pill box is the user-validated solution to forgotten-medication friction',
+                        'Alarms and reminder routines support consistent dosing — but only when they fit the user\'s existing notification preferences',
+                        'Connecting medication to symptom logging surfaces correlations the user would otherwise miss'
+                    ]
+                },
+                {
+                    category: 'Social Navigation & Invisible Disability',
+                    insights: [
+                        'The cane causes unwanted attention — a visible marker of an otherwise invisible condition',
+                        'Social masking is energy-draining; designing for discretion preserves the user\'s limited daily energy budget',
+                        'Avoids video calls (FaceTime) to conserve energy — an unexpected design constraint',
+                        'Discretion must be designed in, not added as a setting — the device should default to socially comfortable'
+                    ]
+                },
+                {
+                    category: 'User-Driven Tools & Coping Hacks',
+                    insights: [
+                        'Users already extend tools beyond intended use: AI tools to fix indentation in code, captions to support comprehension across media',
+                        'Repurposing of mainstream tech (fitness trackers, photo apps as memory aids) is constant — design should honor and extend these patterns',
+                        'Healthcare-system frustration recurs in community discussions: users feel dismissed when presenting wearable data to providers',
+                        'Pacing strategies (diagnosis-based, real-time, preventative) cluster across the community — a paradigm shift fitness trackers do not support natively'
                     ]
                 }
             ],
@@ -716,7 +795,7 @@ export const projects: Project[] = [
         name: 'Research Assistant — IU Indianapolis',
         year: 2024,
         category: 'Research',
-        description: 'Worked across two HCI research labs focusing on interactive data visualization, conceptual metaphor theory, and human-centered AI. Conducted museum field studies, AI-assisted qualitative analysis of 5,000+ Reddit posts, and 20 usability testing sessions with older adults on AI health information systems.',
+        description: 'Worked across two HCI research labs on interactive data visualization, Conceptual Metaphor Theory, and human-centered AI. Co-created and facilitated a 5-station online workshop with 5 industry professionals in museum data visualization, building scripts and video assets in Premiere Pro to introduce CMT before structured FigJam activities. Conducted Kinect-based museum field studies, AI-assisted qualitative analysis of 5,000+ Reddit posts, and 20 usability testing sessions with older adults on AI health information systems.',
         shortDescription: 'HCI research across two labs',
         tools: ['Qualitative Coding', 'Field Studies', 'Python', 'Figma', 'NotebookLM', 'Kinect Sensors', 'Usability Testing'],
         tags: ['HCI Research', 'AI-Assisted Analysis', 'Museum Studies', 'Older Adults', 'Data Visualization'],
@@ -750,8 +829,12 @@ export const projects: Project[] = [
             ],
             researchMethods: [
                 {
-                    name: 'Interactive Data Visualization & Museum Field Studies',
-                    description: 'Designed research and workshop artifacts using Figma and Adobe Premiere Pro for virtual workshops on Zoom. Recruited museum professionals through personal/professional networks, LinkedIn, and academic publications. Researched and curated sustainability-related datasets for interactive visualization deployed at Indiana State Museum. Conducted field studies observing children, utilizing Kinect-based sensors to capture participant movement and reflections. Recorded sessions and conducted qualitative coding to identify patterns and insights in user behavior.'
+                    name: 'Workshop Co-Facilitation with Industry Professionals',
+                    description: 'Co-created and facilitated a virtual workshop on Zoom with 5 industry professionals working in museum data visualization. Built workshop scripts and video assets in Adobe Premiere Pro introducing Conceptual Metaphor Theory before structured exercises. Designed a 5-station FigJam journey: (1) Gesture & Body Movement — exploring gestures used in interactive museum spaces; (2) Functionality of Data Visualization — observations on how visualizations communicate (color, shape, motion); (3) Data Literacy Goals — what knowledge participants take away from visualization interactions; (4) Schemas / Learning Activity — surfacing the mental models participants use to interpret data displays; (5) Pairing & Structuring — synthesis station mapping insights back across schema, gesture, functionality, and literacy goal. Recruited participants through personal/professional networks, LinkedIn, and academic publications.'
+                },
+                {
+                    name: 'Museum Field Studies & Kinect Observation',
+                    description: 'Researched and curated sustainability-related datasets for an interactive data visualization deployed at Indiana State Museum. Conducted field studies observing children\'s interactions, using Kinect-based sensors to capture participant movement and reflections. Recorded sessions and conducted qualitative coding to identify patterns and embodied-interaction insights in real-world museum settings.'
                 },
                 {
                     name: 'AI-Assisted Qualitative Analysis (Conceptual Metaphor Theory)',
@@ -764,19 +847,82 @@ export const projects: Project[] = [
             ],
             participants: [
                 {
-                    role: 'Museum Professionals',
-                    description: 'Recruited through networks, LinkedIn, and academic publications for workshops'
+                    role: '5 Industry Professionals (Museum Data Visualization)',
+                    description: 'Recruited through personal/professional networks, LinkedIn, and academic publications for the 5-station online workshop on gesture, functionality, data literacy, and schemas.'
                 },
                 {
                     role: 'Children (Museum Visitors)',
-                    description: 'Observed during field studies at Indiana State Museum'
+                    description: 'Observed during field studies at Indiana State Museum with Kinect-based movement capture.'
                 },
                 {
                     role: 'Older Adults',
-                    description: '20 participants for AI health information usability testing'
+                    description: '20 participants for AI health information usability testing.'
                 }
             ],
             keyFindings: [
+                {
+                    category: 'Task 1 — Gesture & Body Movement Patterns',
+                    insights: [
+                        'Most-cited gestures: waving (horizontal/vertical), pinching/spreading (zoom), pointing (with arm or leg), grabbing-and-moving, tapping, ducking/full-body, and "flying" (arms-out body movement)',
+                        'Real-world mimicry drives intuition — participants noted pinch-to-zoom and pointing felt natural because the gestures map to existing behaviors',
+                        'Sensor precision is the load-bearing failure mode — when sensitivity drops at the edges of the interaction zone, visitors become frustrated and abandon the experience',
+                        'Children\'s museum patterns (jumping to pop bubbles, bodies as obstacles for digital butterflies) have a low entry point but trade learning depth for engagement',
+                        'Floor-mounted positional cues (dots showing where to stand) consistently helped visitors understand desired behaviors before they were performed'
+                    ]
+                },
+                {
+                    category: 'Task 2 — Functionality of Data Visualization',
+                    insights: [
+                        'Visual signifiers of control matter — color pulses, rings emanating from objects, or smooth feedback keep visitors confident the system is responding',
+                        'Multi-user systems struggle when orientation depends on "who has control" — one user\'s engagement can degrade everyone else\'s view',
+                        'Simple changes outperform overly cute interactions — visitors leave less satisfied when designers over-design feedback layers',
+                        'Smooth transitions matter functionally, not just aesthetically — jarring shifts can trigger motion sickness for some users',
+                        'Avoid text-based change signaling in multilingual / tourist contexts — color, motion, and shape carry across language',
+                        'Color coding (different colors for different categories or visualization modes) helps visitors track transitions between data states'
+                    ]
+                },
+                {
+                    category: 'Task 3 — Data Literacy Goals & Engagement',
+                    insights: [
+                        'Data literacy is not always the primary goal — participants noted some experiences are valuable purely for engagement, with learning as a bonus',
+                        'Storytelling drives interpretation — climate, population, and astronomy data resonate when wrapped in narrative rather than presented as raw measurement',
+                        'Visitor-controlled exploration (e.g., navigating large NOAA/NASA datasets with body movement) creates deeper engagement than guided tours through fixed views',
+                        'Engagement is upstream of learning — without visitor appeal, persistence drops, and the learning outcomes never land regardless of content quality',
+                        'Re-imagining standard data charts (e.g., the Keeling Curve restaged as a roller-coaster ride) made abstract climate trends viscerally felt for younger audiences',
+                        'Takeaways participants want to leave with: better understanding of how a concept is measured, awareness of trends, understanding of method limitations, and renewed interest in the topic'
+                    ]
+                },
+                {
+                    category: 'Task 4 — Schemas & Embodied Metaphor Mappings',
+                    insights: [
+                        'Participants worked through schemas across the Space, Force, Unity-Multiplicity, Identity/Surface, Process, Attribute, and Containment groups — selecting the ones most relevant to their work',
+                        'Specific schema-to-gesture mappings surfaced organically: Near-Far → walking along a hallway paired with sound-wave elongation; Contact → floor sensors and physical interaction with environment; Removal/Restraint → pull elements out of a dataset to see how data shifts',
+                        'Force schemas mapped to concrete physical metaphors: Resistance → wringing motion, Blockage → side-to-side head shake, Merging → clasping hands together',
+                        'Identity schemas mapped to sorting/classification activities: Matching → comparing galaxy images against type samples (a Zooniverse touch-table use case), Part-Whole → selecting an object to see its internal composition',
+                        'Attribute schemas mapped to gradient or scalar interactions: Dark-Bright → physical motion in front of a light source paired with a real-time light-output graph (for eclipse/transit data)',
+                        'Containment schemas mapped to sorting tasks: Container → sorting items into buckets by criteria (predefined or user-defined)'
+                    ]
+                },
+                {
+                    category: 'Task 5 — Pairing & Structuring Synthesis',
+                    insights: [
+                        'The strongest interactive designs pair a schema, a gesture, a functionality, and a data literacy goal simultaneously — when any one of these is misaligned, the interaction breaks down',
+                        'Astronomy and life-sciences contexts surfaced repeatedly as fertile ground for body-as-interface designs (full-body movement for navigating star life cycles, anatomy explorations)',
+                        'Visitor demographics determine which gesture-schema pairings work — what is "intuitive" for a children\'s museum audience differs from what works for adult science-museum visitors',
+                        'Index-card / category-pairing exercises (Schema · Body Movement · Functionality · Data Literacy Goal · Other Considerations) gave participants a structured way to surface their accumulated experience as design principles'
+                    ]
+                },
+                {
+                    category: 'Cross-Task Connections',
+                    insights: [
+                        'Intuition = real-world mimicry — across every task, participants cited gestures and schemas that map to existing bodily experience as the highest-success interactions',
+                        'Failure mode is ambiguity — imprecise sensors, missing visual feedback, text-only signaling, and unclear control states all caused visitor abandonment',
+                        'Visual signifiers of system response are non-negotiable — color pulses, rings, smooth transitions, and on-screen affordances close the loop on every interaction',
+                        'Multi-user experience is its own design problem — single-user interactions fall apart in group settings without orientation-neutral patterns',
+                        'Body-as-interface unlocks accessibility patterns that hand-only or screen-only interactions cannot reach',
+                        'Industry professionals contributed design-side insight that visitor-observation research cannot — they articulated why specific design moves work, drawing on years of seeing visitor behavior'
+                    ]
+                },
                 {
                     category: 'Embodied Interaction in Museums',
                     insights: [
@@ -819,8 +965,13 @@ export const projects: Project[] = [
             ],
             designIterations: [
                 {
-                    area: 'Museum Workshop Design',
-                    improvements: ['Created virtual workshop artifacts in Figma and Adobe Premiere Pro', 'Adapted recruitment strategies across multiple channels', 'Curated sustainability datasets for visualization']
+                    area: 'Online Workshop Co-Facilitation',
+                    improvements: [
+                        'Co-created and facilitated a 5-station virtual workshop on Zoom with 5 industry professionals',
+                        'Built Conceptual Metaphor Theory primer videos in Adobe Premiere Pro to bring non-academic participants up to speed before exercises',
+                        'Designed the 5-station FigJam: Gesture → Functionality → Data Literacy Goal → Schemas → Pairing & Structuring',
+                        'Recruited across personal/professional networks, LinkedIn, and academic publications'
+                    ]
                 },
                 {
                     area: 'AI Prompt Engineering',
@@ -850,6 +1001,9 @@ export const projects: Project[] = [
                 'Qualitative Research',
                 'Field Studies & Observational Research',
                 'User Interviews & Usability Testing',
+                'Workshop Co-Facilitation',
+                'Video Asset Creation (Adobe Premiere Pro)',
+                'FigJam Workshop Design',
                 'Qualitative Coding & Thematic Analysis',
                 'Conceptual Metaphor Theory (CMT)',
                 'Embodied Cognition & Schemata',
