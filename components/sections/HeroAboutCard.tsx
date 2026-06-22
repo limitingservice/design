@@ -49,7 +49,7 @@ export default function HeroAboutCard() {
                 {/* Bio text */}
                 <div className="space-y-2 md:space-y-4 text-gray-300 text-base leading-relaxed mb-4 md:mb-8 flex-grow">
                     <p>
-                        Creating human-centered experiences through research, blending tech, culture, and history—pulling from HCI, AI, and diverse perspective to create accessible, thoughtful, and real-world impact.
+                        Indianapolis local from Lima, Peru and West Orange, New Jersey. In UX and HCI since 2018 with a recently completed HCI Master&apos;s, specializing in accessible, inclusive design and mixed-methods research. On the side: vintage textiles and streetwear photoshoots.
                     </p>
                 </div>
 
